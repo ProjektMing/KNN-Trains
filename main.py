@@ -2,15 +2,23 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib import rcParams
 import os
+import argparse
 
 import knn # 同目录
-
-dataset_dir = "data_set"
 
 if __name__ == "__main__":
     
     dataset = {}
 
+    # 参数解析
+    parser = argparse.ArgumentParser(description='KNN classifier for image data')
+    parser.add_argument('--dataset_dir', type=str, default="data_set", 
+                        help='Directory containing the dataset (default: data_set)')
+    args = parser.parse_args()
+    
+    dataset_dir = args.dataset_dir
+    print(f"Using dataset directory: {dataset_dir}")
+    
     for label in os.listdir(dataset_dir):
         label_path = os.path.join(dataset_dir, label)
         if os.path.isdir(label_path):
